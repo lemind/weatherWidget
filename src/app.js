@@ -14,24 +14,27 @@ import { rootReducer, rootEpic } from 'src/redux/root';
 
 const epicMiddleware = createEpicMiddleware();
 
-const middleware = process.env.NODE_ENV
+const middleware = process.env.NODE_ENV !== 'development'
   ? applyMiddleware(epicMiddleware)
   : composeWithDevTools(
     applyMiddleware(epicMiddleware)
   );
-
-epicMiddleware.run(rootEpic)
 
 const store = createStore(
   rootReducer,
   middleware
 );
 
+epicMiddleware.run(rootEpic)
+
 const renderApp = () => (
   render(
-    <div className="container">
-      <Main />
-    </div>,
+    <Provider store={ store }>
+      <div className="container">
+        <h3>Weather Widget</h3>
+        <Main />
+      </div>
+    </Provider>,
     document.getElementById('app')
   )
 );

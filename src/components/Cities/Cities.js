@@ -1,21 +1,47 @@
 import React from 'react';
+import { setObservableConfig,
+  compose, withHandlers, withProps } from 'recompose'
+import { connect } from 'react-redux'
 
-import { setObservableConfig, componentFromStream, createEventHandler,
-  compose, withHandlers, mapPropsStream } from 'recompose'
-import rxjsConfig from 'recompose/rxjsObservableConfig'
+import { CityWithButtons, City } from 'components/City';
+import './Cities.less';
 
-// import './Cities.less';
+setObservableConfig({
+  fromESObservable: from,
+  toESObservable: stream => stream,
+})
 
-setObservableConfig(rxjsConfig)
+import { Observable, from } from 'rxjs'
 
-import Rx from 'rxjs'
-
-export default class Cities extends React.Component {
+export class CitiesView extends React.Component {
 
   render() {
+    const { cities } = this.props
+
     return (
-      <div> Cities
+      !!cities.length && <div className="cities">
+        <div className="cities__title">Your cities</div>
+        <div className="cities__list">
+          { !!cities.length && cities.map((city, i) => (
+            <CityWithAddButton
+              cityName={ city.name }
+              temp={ city.main.temp }
+              city={ city }
+              key={ i }
+            />
+          ))}
+        </div>
       </div>
     )
   };
 }
+
+const CityWithAddButton = withProps({ delete:true })(CityWithButtons);
+
+export default compose(
+  connect(
+    (state) => ({
+      cities: state.cities.list
+    })
+  )
+)(CitiesView);
