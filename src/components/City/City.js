@@ -29,7 +29,7 @@ export class City extends React.Component {
 
 const withAddCityActionButton = branch(
   props => props.add,
-  renderComponent(AddCityButton()),
+  renderComponent((props) => AddCityButton(props)(props)),
 );
 
 const withDeleteCityActionButton = branch(

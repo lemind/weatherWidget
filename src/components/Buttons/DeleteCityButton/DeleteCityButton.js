@@ -2,11 +2,12 @@ import { ButtonWithAction } from 'components/Buttons/Button';
 
 import { citiesActions } from 'src/redux/cities';
 
-export default () => {
+export default (props) => {
 	const params = {
 		buttonText: 'delete',
 		action: citiesActions.deleteCity,
-		paramName: 'city'
+		paramName: 'city',
+		...props
 	}
 	return ButtonWithAction(params)
 }

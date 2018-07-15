@@ -4,8 +4,8 @@ import { setObservableConfig, renderComponent,
 
 import { ButtonView } from './index'
 
-export default ({ buttonText, action, paramName }) => compose(
-  withProps({ buttonText }),
+export default ({ buttonText, action, paramName, ...props }) => compose(
+  withProps({ buttonText, ...props }),
   connect(
     (state) => ({}),
     (dispatch) => ({
