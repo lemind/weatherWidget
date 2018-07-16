@@ -1,17 +1,17 @@
 import React from 'react';
 import { setObservableConfig,
-  compose, withHandlers, withProps } from 'recompose'
+  compose, withHandlers, withProps, lifecycle } from 'recompose'
 import { connect } from 'react-redux'
-
-import { CityWithButtons, City } from 'components/City';
-import './Cities.less';
-
+import { Observable, from } from 'rxjs'
 setObservableConfig({
   fromESObservable: from,
   toESObservable: stream => stream,
 })
 
-import { Observable, from } from 'rxjs'
+import { CityWithButtons, City } from 'components/City';
+import { citiesActions } from 'src/redux/cities';
+import { storage } from 'helpers/storage';
+import './Cities.less';
 
 export class CitiesView extends React.Component {
 
@@ -42,6 +42,19 @@ export default compose(
   connect(
     (state) => ({
       cities: state.cities.list
+    }),
+    (dispatch) => ({
+      fetchBulkCities: (ids) => {
+        return dispatch(citiesActions.fetchBulkCities(ids))
+      }
     })
-  )
+  ),
+  lifecycle({
+    componentDidMount() {
+      const ids = storage.getCitiesIds();
+      if (ids && ids.length) {
+        this.props.fetchBulkCities(ids)
+      }
+    }
+  })
 )(CitiesView);

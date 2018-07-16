@@ -9,6 +9,7 @@ setObservableConfig({
   toESObservable: stream => stream,
 })
 
+import { kelvinToCelsius } from 'helpers/utils'
 import AddCityButton from 'components/Buttons/AddCityButton'
 import DeleteCityButton from 'components/Buttons/DeleteCityButton'
 import './City.less';
@@ -20,7 +21,7 @@ export class City extends React.Component {
     return (
       <div className="city">
         <div>{ cityName }</div>
-        <div>{ Math.round(temp - 273.15) } &#8451;</div>
+        <div>{ kelvinToCelsius(temp) } &#8451;</div>
         <div className="city__buttons">{ children }</div>
       </div>
     )

@@ -1,11 +1,12 @@
 import { ajax } from 'rxjs/observable/dom/ajax';
-import { API_HOST } from '../config';
+import { API_HOST, APP_ID } from '../config';
 
+const appId = APP_ID;
 export const weatherAPI = {
   weatherByTerm: (term) => {
-  	const appId = '9d750758281f88d31834537546aee57e'
-
     return ajax.getJSON(`${API_HOST}/weather?q=${term}&APPID=${appId}`);
   },
-
+  weatherBulkCities: (ids) => {
+    return ajax.getJSON(`${API_HOST}/group?id=${ids.join(',')}&APPID=${appId}`);
+  }
 };
