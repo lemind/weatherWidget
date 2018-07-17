@@ -25,7 +25,7 @@ export const reducer = (state = initialState, action) => {
     case 'REQUEST_BULK_CITIES_SUCCEEDED':
       return {
         ...state,
-        list: [...state.list, ...action.payload],
+        list: [...action.payload],
         loading: false
       };
     case 'REQUEST_BULK_CITIES_FAILED':

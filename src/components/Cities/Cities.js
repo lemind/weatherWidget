@@ -8,6 +8,7 @@ setObservableConfig({
   toESObservable: stream => stream,
 })
 
+import { UPDATE_TIME } from 'src/config'
 import { CityWithButtons, City } from 'components/City';
 import { citiesActions } from 'src/redux/cities';
 import { storage } from 'helpers/storage';
@@ -38,6 +39,13 @@ export class CitiesView extends React.Component {
 
 const CityWithAddButton = withProps({ delete:true })(CityWithButtons);
 
+const updateWeather = function(fetchBulkCities) {
+  const ids = storage.getCitiesIds();
+  if (ids && ids.length) {
+    fetchBulkCities(ids)
+  }
+}
+
 export default compose(
   connect(
     (state) => ({
@@ -51,10 +59,13 @@ export default compose(
   ),
   lifecycle({
     componentDidMount() {
-      const ids = storage.getCitiesIds();
-      if (ids && ids.length) {
-        this.props.fetchBulkCities(ids)
-      }
+      updateWeather(this.props.fetchBulkCities)
+    },
+    componentWillUpdate(props) {
+      setTimeout(
+        () => updateWeather(props.fetchBulkCities),
+        UPDATE_TIME,
+      );
     }
   })
 )(CitiesView);
