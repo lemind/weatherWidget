@@ -3,7 +3,9 @@ export const initialState = {
   loading: false,
   error: null,
   searchCurrentTerm: '',
-  searchResult: null
+  searchResult: null,
+  defaultCityCoordinates: null,
+  defaultCityResult: null
 };
 
 export const reducer = (state = initialState, action) => {
@@ -21,6 +23,24 @@ export const reducer = (state = initialState, action) => {
         loading: false
       };
     case 'REQUEST_SEARCH_BY_TERM_FAILED':
+      return {
+        ...state,
+        loading: false,
+        error: action.error
+      };
+    case 'REQUEST_SEARCH_BY_COORDINATES':
+      return {
+        ...state,
+        loading: true,
+        defaultCityCoordinates: action.coordinates
+      };
+    case 'REQUEST_SEARCH_BY_COORDINATES_SUCCEEDED':
+      return {
+        ...state,
+        defaultCityResult: action.payload,
+        loading: false
+      };
+    case 'REQUEST_SEARCH_BY_COORDINATES_FAILED':
       return {
         ...state,
         loading: false,

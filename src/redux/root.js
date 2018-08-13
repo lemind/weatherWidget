@@ -11,6 +11,7 @@ export const rootReducer = combineReducers({
 
 export const rootEpic = combineEpics(
   weatherEpics.fetchWeatherEpic,
+  weatherEpics.fetchWeatherCoordEpic,
   citiesEpics.addCityEpic,
   citiesEpics.deleteCityEpic,
   citiesEpics.fetchCitiesEpic

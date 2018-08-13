@@ -29,3 +29,23 @@ weatherEpics.fetchWeatherEpic = action$ =>
       });
   }
 
+weatherEpics.fetchWeatherCoordEpic = action$ =>
+  {
+    return action$.ofType('REQUEST_SEARCH_BY_COORDINATES')
+      .mergeMap(action => {
+        if (action.coordinates) {
+          return API.weatherByCoordinates(action.coordinates)
+            .map(response => {
+              return actions.searchByCoordinatesSucceeded(response)
+            })
+            .catch(error => {
+              if (error.response.cod === '404') {
+                return of(actions.searchByCoordinatesFailed({ ...error.response }))
+              } else {
+                // ToDo: catch this one
+                throw new Error({ type: 'request', error: error.response });
+              }
+            });
+        }
+      });
+  }

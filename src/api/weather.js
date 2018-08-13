@@ -6,6 +6,9 @@ export const weatherAPI = {
   weatherByTerm: (term) => {
     return ajax.getJSON(`${API_HOST}/weather?q=${term}&APPID=${appId}`);
   },
+  weatherByCoordinates: (coordinates) => {
+    return ajax.getJSON(`${API_HOST}/weather?lat=${coordinates.lat}&lon=${coordinates.lon}&APPID=${appId}`);
+  },
   weatherBulkCities: (ids) => {
     return ajax.getJSON(`${API_HOST}/group?id=${ids.join(',')}&APPID=${appId}`);
   }

@@ -50,4 +50,4 @@ export const Buttons = compose(
   withDeleteCityActionButton
 )(() => <div></div>)
 
-export const  CityWithButtons = nest(City, Buttons)
+export const CityWithButtons = nest(City, Buttons)
