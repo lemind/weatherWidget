@@ -16,10 +16,16 @@ import './DefaultCity.less';
 export class DefaultCity extends React.Component {
   render() {
     const defaultCity = this.props.defaultCity
+    const { clickHeader } = this.props
     return (
       <div className="default__city">
         { defaultCity && 
-        <div className="info">Is { defaultCity.name } your current city?</div>}
+        <div className="info">Is 
+        <span
+          className="cityName"
+          onClick={ () => clickHeader(defaultCity.name) }
+        >{ defaultCity.name }</span>
+         your current city?</div>}
       </div>
     )
   };
@@ -33,19 +39,25 @@ export default compose(
     (dispatch) => ({
       searchByCoordinates: (coordinates) => {
         return dispatch(weatherActions.searchByCoordinates(coordinates))
+      },
+      searchByTerm: (currentTerm) => {
+        return dispatch(weatherActions.searchByTerm(currentTerm))
       }
     })
   ),
+  withHandlers({
+    clickHeader: ({ searchByTerm }) => (name) => {
+      searchByTerm(name);
+    },
+  }),
   lifecycle({
     componentDidMount() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition => {
-          if (!storage.showOnce) {
-            this.props.searchByCoordinates({
-              lat: showPosition.coords.latitude,
-              lon: showPosition.coords.longitude
-            })
-          }
+          this.props.searchByCoordinates({
+            lat: showPosition.coords.latitude,
+            lon: showPosition.coords.longitude
+          })
         });
       }
 

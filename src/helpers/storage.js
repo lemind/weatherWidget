@@ -35,27 +35,4 @@ export const storage = {
       throw new Error('Local storage error')
     }
   },
-  saveDefaultCityData: function(data) {
-    try {
-      let defaultCity = JSON.parse(localStorage.getItem('defaultCity'));
-      if (!defaultCity) {
-        defaultCity = {};
-      }
-      defaultCity = data
-      localStorage.setItem('defaultCity', JSON.stringify(defaultCity));
-    } catch(e) {
-      throw new Error('Local storage error')
-    }
-  },
-  getDefaultCityData: function() {
-    try {
-      let defaultCity = JSON.parse(localStorage.getItem('defaultCity'));
-      if (!defaultCity) {
-        return
-      }
-      return defaultCity
-    } catch(e) {
-      throw new Error('Local storage error')
-    }
-  },
 }
