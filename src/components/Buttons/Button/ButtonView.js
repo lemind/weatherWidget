@@ -10,7 +10,7 @@ export default class ButtonView extends React.Component {
       <div>
         <button
           onClick={ onClick }
-          disabled={!active}
+          disabled={ !active }
         >{ buttonText }</button>
       </div>
     )

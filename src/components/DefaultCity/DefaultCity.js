@@ -1,12 +1,6 @@
 import React from 'react';
-import { setObservableConfig,
-  compose, withHandlers, withProps, lifecycle } from 'recompose'
+import { compose, withHandlers, lifecycle } from 'recompose'
 import { connect } from 'react-redux'
-import { Observable, from } from 'rxjs'
-setObservableConfig({
-  fromESObservable: from,
-  toESObservable: stream => stream,
-})
 
 import { storage } from 'helpers/storage';
 import { API } from 'api';

@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
-import { setObservableConfig, renderComponent,
-  compose, withHandlers, withProps, branch, nest } from 'recompose'
+import { compose, withHandlers, withProps } from 'recompose'
 
 import { ButtonView } from './index'
 

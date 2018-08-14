@@ -1,19 +1,9 @@
 import React from 'react';
-
-import { Observable, from } from 'rxjs'
-
-import { setObservableConfig,
-  compose, withHandlers, withProps } from 'recompose'
-
+import { compose, withProps } from 'recompose'
 import { connect } from 'react-redux'
 
 import { CityWithButtons, City } from 'components/City';
 import { citiesSelectors } from 'src/redux/cities';
-
-setObservableConfig({
-  fromESObservable: from,
-  toESObservable: stream => stream,
-})
 
 const getActive = (sitiesIdsSelector, searchResult) => {
   if (!searchResult) {

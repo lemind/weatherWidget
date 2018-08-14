@@ -1,13 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { setObservableConfig, renderComponent,
-  compose, withHandlers, withProps, branch, nest } from 'recompose'
-
-import { from } from 'rxjs'
-setObservableConfig({
-  fromESObservable: from,
-  toESObservable: stream => stream,
-})
+import { renderComponent,
+  compose, branch, nest } from 'recompose'
 
 import { kelvinToCelsius, formWeatherPicSrc } from 'helpers/utils'
 import AddCityButton from 'components/Buttons/AddCityButton'

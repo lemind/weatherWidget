@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './Main.less';
 import Cities from 'components/Cities';
 import Search from 'components/Search';

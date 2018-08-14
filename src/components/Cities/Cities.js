@@ -1,12 +1,6 @@
 import React from 'react';
-import { setObservableConfig,
-  compose, withHandlers, withProps, lifecycle } from 'recompose'
+import { compose, lifecycle, withProps } from 'recompose'
 import { connect } from 'react-redux'
-import { Observable, from } from 'rxjs'
-setObservableConfig({
-  fromESObservable: from,
-  toESObservable: stream => stream,
-})
 
 import { UPDATE_TIME } from 'src/config'
 import { CityWithButtons, City } from 'components/City';
@@ -15,7 +9,6 @@ import { storage } from 'helpers/storage';
 import './Cities.less';
 
 export class CitiesView extends React.Component {
-
   render() {
     const { cities } = this.props
 

@@ -1,19 +1,12 @@
 import React from 'react';
 import { Observable, from } from 'rxjs'
-import { setObservableConfig,
-  compose, withHandlers } from 'recompose'
+import { compose, withHandlers } from 'recompose'
 import { connect } from 'react-redux'
 
 import { weatherActions } from 'src/redux/weather/index';
 import './Search.less';
 
-setObservableConfig({
-  fromESObservable: from,
-  toESObservable: stream => stream,
-})
-
 export class ViewSearch extends React.Component {
-
   render() {
   	const { currentTerm, onChange, ...others } = this.props
 
