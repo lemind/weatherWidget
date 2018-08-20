@@ -17,7 +17,7 @@ export class CitiesView extends React.Component {
         <div className="cities__title">Your cities</div>
         <div className="cities__list">
           { !!cities.length && cities.map((city, i) => (
-            <CityWithAddButton
+            <CityWithDeleteButton
               cityName={ city.name }
               temp={ city.main.temp }
               city={ city }
@@ -30,7 +30,7 @@ export class CitiesView extends React.Component {
   };
 }
 
-const CityWithAddButton = withProps({ delete:true })(CityWithButtons);
+const CityWithDeleteButton = withProps({ delete:true })(CityWithButtons);
 
 const updateWeather = function(fetchBulkCities) {
   const ids = storage.getCitiesIds();
